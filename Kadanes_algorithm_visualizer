@@ -149,7 +149,7 @@ void kadaneVisualizer(vector<int> &nums){
     for(int i=1;i<nums.size();i++){
         p=0;
         if(currsum<0){
-            str1="cursum{"+to_string(currsum)+"} is -ve ,so started currsum newly from "+to_string(nums[i]);
+            str1="cursum{"+to_string(currsum)+"} was -ve ,so started currsum newly from "+to_string(nums[i]);
           currsum=nums[i];
             tempstart=i;
             }else{
@@ -157,7 +157,7 @@ void kadaneVisualizer(vector<int> &nums){
             currsum+=nums[i];
         }
         if(currsum>maxsum){
-            str2="currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} so changed maxsum as currsum {maxsum <- currsum}";
+            str2="currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} so updated maxsum {maxsum = currsum}";
              maxsum=currsum;
              start=tempstart;
             end=i;
