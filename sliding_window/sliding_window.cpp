@@ -125,7 +125,8 @@ void slidingwindow(vector<int> nums,int k){
             slidingwindow(nums,k);
           }
           else if(ch=='q'||ch=='Q'){
-            cout<<"\n-->sliding window visualization completed<--\n\ntip: you can try a new array with a new window size!! just press 'r' ,press 'q' to quit \n";
+            cout<<green<<"\n\n-->sliding window visualization completed<--\n\ntip: you can try a new array with a new window size!! just press 'r' ,press 'q' to quit \n";
+           cout<<white;
             while(1){
                 char ch=_getch();
                  if(ch=='r'||ch=='R'){
