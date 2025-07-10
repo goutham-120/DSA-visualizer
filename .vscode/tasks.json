@@ -16,7 +16,7 @@
           "sliding_window/sliding_window.cpp",
           "two_pointer/two_pointer.cpp",
           "-o",
-          "codeflow.exe"
+          "Main.exe"
         ],
         "group": {
           "kind": "build",
