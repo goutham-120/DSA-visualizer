@@ -18,10 +18,10 @@ void reset(vector<int>& nums){
     gotoxy(0,0);
     nums.clear();
     int n;
-    cout<<"enter your new array size: ";
+    cout<<yellow<<"enter your new array size: "<<white;
     cin>>n;
     nums.resize(n);
-    cout<<"\nenter the array elements:\n";
+    cout<<yellow<<"\nenter the array elements:\n"<<white;
     for(int i=0;i<n;i++){
         cin>>nums[i];
     }
@@ -208,8 +208,9 @@ void kadaneVisualizer(vector<int> &nums){
             cout<<"final result :\n";
           displayfinal(nums,fs,fe,fm);
             cout<<green;
-            cout<<"\n\n---> Kadanes algorithm visualization completed  <----\n\n";
+            cout<<green<<"\n\n---> Kadanes algorithm visualization completed  <----\n\n";
             cout<<"if you want to use different array ,press 'r' or press again 'q' to exit\n";
+           cout<<white;
            while(1){
             cout<<white;
             char ch=_getch();
