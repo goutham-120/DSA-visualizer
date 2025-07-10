@@ -2,15 +2,9 @@
 #include<string>
 #include<vector>
 #include<algorithm>
-#include<conio.h>
+#include "consoleUtils.h"
 using namespace std;
-#define red "\033[31m"
-#define green "\033[32m"
-#define yellow "\033[33m"
-#define blue "\033[34m"
-#define purple "\033[35m"
-#define cyan "\033[36m"
-#define white "\033[37m"
+namespace twopointer{
 struct step{
     vector<int> res;
     int left;
@@ -18,16 +12,10 @@ struct step{
     string st;
     int f;
 };
-void gotoxy(int x,int y){
-    cout<<"\033["<<x<<";"<<y<<"H";
-}
-void clear(){
-    cout<<"\033[2J\033[H";
-}
 void reset(vector<int>& nums,int& target){
-    clear();
+    gotoxy(0,0);
     nums.clear();
-    cout<<"resetting array.....\n";
+    cout<<green<<"----> resetting array.....\n\n";
     int n;
     int w;
     cout<<cyan;
@@ -44,7 +32,6 @@ void reset(vector<int>& nums,int& target){
     cin>>w;
     target=w;
     sort(nums.begin(),nums.end());
-    clear();
 }
 void displaytwoptr(vector<int> nums,vector<int> result,int left,int right,string str,int target,int f){
          cout<<cyan<<"sorted array: ";
@@ -75,7 +62,7 @@ void twopointer(vector<int> nums,int target){
      vector<int> result;
      vector<step> steps;
      int f=0;
-     string str="(lets take two pointers: left pointer(red),right pointer(blue))                                 ";
+     string str="-> lets take two pointers: left pointer(red),right pointer(blue)";
      steps.push_back({result,l,r,str});
      while(l<=r){
         int p=0;
@@ -85,16 +72,16 @@ void twopointer(vector<int> nums,int target){
               left=l;
               right=r;
               f=1;
-              str="(their sum{"+to_string(nums[l])+"+"+to_string(nums[r])+"} is equal to the target{"+to_string(target)+"} so found!)                                      ";
+              str="-> (their sum{"+to_string(nums[l])+"+"+to_string(nums[r])+"} is equal to the target{"+to_string(target)+"} so found!)   ";
           p=1;
           }
           else if(nums[l]+nums[r]<target){
               
-              str="(their sum{"+to_string(nums[l])+"+"+to_string(nums[r])+"} was less than target{"+to_string(target)+"} so incremented left pointer to get bigger value)      ";
+              str="-> (their sum{"+to_string(nums[l])+"+"+to_string(nums[r])+"} was less than target{"+to_string(target)+"} so incremented left pointer to get bigger value) ";
              l++;
           }
           else{
-            str="(their sum{"+to_string(nums[l])+"+"+to_string(nums[r])+"} was bigger than target{"+to_string(target)+"} so decremented right pointer to get smaller value)";
+            str="-> (their sum{"+to_string(nums[l])+"+"+to_string(nums[r])+"} was bigger than target{"+to_string(target)+"} so decremented right pointer to get smaller value)";
             r--;
           }
           steps.push_back({result,l,r,str,f});
@@ -103,9 +90,11 @@ void twopointer(vector<int> nums,int target){
      int stepptr=0;
      while(1){
         gotoxy(0,0);
+        cout<<green<<"\n\n----> TWO POINTER VISUALIZATION <-----\n\n";
+        cout<<"Q) Find the pair of numbers in a sorted array whose sum equals target:"<<red<<" similar to LC question - 167  \n\n";
         cout<<cyan;
         cout<<"press : 'n' for next step\n'p' for previous step\n'q' to quit\n'r' for resetting the current array\n\n";
-        cout<<"step: "<<stepptr+1<<"/"<<steps.size()<<"\n";
+        cout<<"step: "<<stepptr+1<<"/"<<steps.size()<<"\n\n";
         step s=steps[stepptr];
         displaytwoptr(nums,s.res,s.left,s.right,s.st,target,s.f);
          char ch=_getch();
@@ -121,24 +110,28 @@ void twopointer(vector<int> nums,int target){
             twopointer(nums,target);
         }
         else if(ch=='q'||ch=='Q'){
-            cout<<"\n\n two pointer method visualization completed!\n\n";
-            cout<<"if you want to use different array now ,press 'r' or press again 'q' to exit\n";
+            cout<<green<<"\n\n-----> two pointer method visualization completed! <-----\n\n";
+            cout<<yellow<<"if you want to use different array now ,press 'r' or press again 'q' to exit\n";
+            cout<<white;
            while(1){
             char ch=_getch();
              if(ch=='r'||ch=='R'){
                 reset(nums,target);
                 twopointer(nums,target);
              }
-             else if(ch=='q'||ch=='Q') exit(0);
+             else if(ch=='q'||ch=='Q'){
+                  return;
+             }
         }
     
     }
  }
      
 }
-int main(){
+void run(){
     vector<int> nums={1,2,3,4,5,8};
     int target=7;
     twopointer(nums,target);
 
+  }
 }
