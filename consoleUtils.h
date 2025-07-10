@@ -9,14 +9,16 @@ using namespace std;
 #define purple "\033[35m"
 #define cyan "\033[36m"
 #define white "\033[37m"
+inline void clearConsole() {
+    cout << "\033[3J\033[H"<<flush;
+}
 inline void gotoxy(int x, int y) {
+    clearConsole();
     cout << "\033[" << x << ";" << y << "H";
-    cout << "\033[0J";
+    cout << "\033[0J"<<flush;
+   
 }
 
-inline void clearConsole() {
-    cout << "\033[2J\033[H";
-}
 
 #ifdef _WIN32
     #include <conio.h>
