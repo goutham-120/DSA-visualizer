@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build CodeFlow Project",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+            "-I.",
+          "Main.cpp",
+          "binary_search_on_answer/binary_search.cpp",
+          "kadane/kadane.cpp",
+          "Monotonic_Stack/monotonic_stack.cpp",
+          "prefix_sum/prefix_sum.cpp",
+          "recursion_and_backtracking/recursion_backtracking.cpp",
+          "sliding_window/sliding_window.cpp",
+          "two_pointer/two_pointer.cpp",
+          "-o",
+          "codeflow.exe"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": [],
+        "detail": "Build the complete CodeFlow DSA Visualizer"
+      }
+    ]
+  }
