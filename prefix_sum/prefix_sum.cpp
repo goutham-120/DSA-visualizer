@@ -2,44 +2,30 @@
 #include<string>
 #include<vector>
 #include<algorithm>
-#include<conio.h>
 using namespace std;
-
-#define red "\033[31m"
- #define green "\033[32m"
- #define yellow "\033[33m"
- #define blue "\033[34m"
-#define purple "\033[35m"
-#define cyan "\033[36m"
-#define white "\033[37m"
-
+#include "consoleUtils.h"
+namespace prefix{
 struct step{
      int currindex;
      vector<int> prefix;
      string st;
 };
-void gotoxy(int x,int y){
-    cout<<"\033["<<x<<";"<<y<<"H";
-}
-void clear(){
-    cout<<"\033[2J\033[H";
-}
-
 void reset(vector<int>& nums){
-    system("cls");
+    gotoxy(0,0);
     nums.clear();
     int n;
-    cout<<"enter your new array size: ";
+    cout<<green<<"----> changing array... <----\n\n";
+    cout<<yellow;
+    cout<<"enter your new array size: "<<white;
     cin>>n;
     nums.resize(n);
-    cout<<"\nenter the array elements:\n";
+    cout<<yellow<<"\nenter the array elements:\n"<<white;
     for(int i=0;i<n;i++){
         cin>>nums[i];
     }
-    clear();
 }
 void display(vector<int> nums,int currindex,vector<int> prefix,string st){
-    cout<<white;
+    cout<<cyan;
      cout<<"given array: [ ";
      cout<<red;
      cout<<"[";
@@ -52,10 +38,11 @@ void display(vector<int> nums,int currindex,vector<int> prefix,string st){
             cout<<white;
         }
         else{
+            cout<<white;
             cout<<nums[i]<<" ";
         }
    }
-   cout<<"]";
+   cout<<cyan<<"]";
    cout<<green;
    cout<<"\n\nprefix sum array: ";
    for(int i=0;i<prefix.size();i++){
@@ -95,9 +82,10 @@ void prefixsum(vector<int> nums){
     int stepptr=0;
     while(1){
         gotoxy(0,0);
-       
+        cout<<green<<"\n\n-----> PREFIX SUM VISUALIZATION <------\n\n";
+        cout<<"Q) Find the running sum of each element upto its index in an array "<<red<<"similar LC question - 1480\n\n";
         cout<<cyan;
-        cout<<"press : 'n' for next step\n'p' for previous step\n'q' to quit\n'r' for resetting the current array\n\n";
+        cout<<"press : 'n' for next step\n'p' for previous  step\n'q' to quit\n'r' for resetting the current array\n\n";
         cout<<"step: "<<stepptr+1<<"/"<<steps.size()<<"\n";
         step s=steps[stepptr];
         display(nums,s.currindex,s.prefix,s.st);
@@ -114,15 +102,16 @@ void prefixsum(vector<int> nums){
             prefixsum(nums);
         }
         else if(ch=='q'||ch=='Q'){
-            cout<<"\n\n prefix sum visualization completed!\n\n";
+            cout<<green<<"\n\n---> prefix sum visualization completed! <-----\n\n";
             cout<<"if you want to use different array now ,press 'r' or press again 'q' to exit\n";
+           cout<<white;
            while(1){
             char ch=_getch();
              if(ch=='r'||ch=='R'){
                 reset(nums);
                 prefixsum(nums);
              }
-             else if(ch=='q'||ch=='Q') exit(0);
+             else if(ch=='q'||ch=='Q') return;
         }
     
     }
@@ -130,9 +119,8 @@ void prefixsum(vector<int> nums){
  }
  return;
 }
-int main(){
+void run(){
     vector<int> nums={1,2,3,4,5,6,7};
     prefixsum(nums);
-    return 0;
-
+  }
 }
