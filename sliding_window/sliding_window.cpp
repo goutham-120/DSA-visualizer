@@ -1,10 +1,9 @@
 #include<iostream>
 #include<vector>
-#include<windows.h>
 #include "consoleUtils.h"
 #include<string>
 using namespace std;
-
+namespace Sliding_Window{
 struct step{
     int currindex;
     int currstart;
@@ -17,13 +16,15 @@ struct step{
     string st2;
 };
 void reset(vector<int>& nums,int& k){
+
     gotoxy(0,0);
+    cout<<green<<"----> resetting array and subarray size.....\n\n";
     nums.clear();
     int n,p;
-    cout<<"enter your new array size: ";
+    cout<<yellow<<"enter your new array size: ";
     cin>>n;
     nums.resize(n);
-    cout<<"\nenter the array elements:\n";
+    cout<<yellow<<"\nenter the array elements:\n";
     for(int i=0;i<n;i++){
         cin>>nums[i];
     }
@@ -49,7 +50,7 @@ void display(vector<int> nums,int currindex,int currstart,int currend,int maxsta
             cout<<white;
         }
     }
-    cout<<" ]"<<endl<<endl;
+    cout<<" ]          "<<yellow<<"subarray size -> k = "<<currend-currstart+1<<endl<<endl;
     cout<<purple;
     cout<<"currsum       ";
     cout<<red;
@@ -82,15 +83,15 @@ void slidingwindow(vector<int> nums,int k){
     maxsum=currsum;
     maxstart=0;
     maxend=k-1;
-    str1="starting with a window of size "+to_string(k)+" from "+to_string(nums[0])+" to "+to_string(nums[k-1]);
-    str2="lets say the current window has the maximum sum ->currsum = maxsum = "+to_string(maxsum);
+    str1="-> starting with a window of size "+to_string(k)+" from "+to_string(nums[0])+" to "+to_string(nums[k-1]);
+    str2="-> lets say the current window has the maximum sum ->currsum = maxsum = "+to_string(maxsum);
     steps.push_back({k-1,0,k-1,0,k-1,currsum,maxsum,str1,str2});
     for(int i=k;i<nums.size();i++){
         currsum=currsum+nums[i]-nums[i-k];
-         str1="checked window sum starting from "+to_string(nums[i-k+1])+" to "+to_string(nums[i]);
-         str2="maxsum didnt change, as still maxsum{"+to_string(maxsum)+"} > currsum{"+to_string(currsum)+"}";
+         str1="-> checked window sum starting from "+to_string(nums[i-k+1])+" to "+to_string(nums[i]);
+         str2="-> maxsum didnt change, as still maxsum{"+to_string(maxsum)+"} > currsum{"+to_string(currsum)+"}";
         if(currsum>maxsum){
-            str2="as currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} updating maxsum -> maxsum = "+to_string(currsum);
+            str2="-> as currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} updating maxsum -> maxsum = "+to_string(currsum);
              maxsum=currsum;
             maxend=i;
             maxstart=i-k+1;
@@ -100,12 +101,12 @@ void slidingwindow(vector<int> nums,int k){
     int stepptr=0;
     while(1){
          gotoxy(0,0);
+         cout<<green<<"\n\n------> SLIDING WINDOW VISUALIZATION <------\n\n"<<white;
+         cout<<green<<"Q) Find maximum sum of subarray of size k in a array:"<<purple<<" similar to LC question : 643\n\n";
           cout<<cyan;
-          cout<<"press 'n' for next step, 'p' for previous step, 'q' to quit, 'r' to reset array\n\n";
+          cout<<"press 'n' for next step\n'p' for previous step\n'q' to quit\n'r' to reset array\n\n";
           cout<<red;
-          cout<<"->lets choose window size as "<<k<<endl;
-          cout<<"->here window means the subarray size!!\n";
-          cout<<"->currsum is the sum of elements inside the current window which is RED\n";
+          cout<<"->currsum is the sum of elements inside the current window (subarray) which is RED\n";
           cout<<"->maxsum is the observed maximum currsum so far \n ";
           cout<<"->yellow number is our current indexed number being processed\n\n";
           cout<<white;
@@ -132,7 +133,7 @@ void slidingwindow(vector<int> nums,int k){
                     slidingwindow(nums,k);
                  }
                   else if(ch=='q'||ch=='Q'){
-                     break;
+                     return;
                   }
             }
             break;
@@ -140,9 +141,9 @@ void slidingwindow(vector<int> nums,int k){
     }
     return ;
 }
-int main(){
+void run(){
     vector<int> nums={1,4,2,10,23,3,1,0,20};
     int windowsize=4;
     slidingwindow(nums,windowsize);
-    return 0;
+ }
 }
