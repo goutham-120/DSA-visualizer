@@ -1,17 +1,9 @@
 #include<iostream>
 #include<vector>
-#include<windows.h>
-#include<conio.h>
 #include<string>
+#include "consoleUtils.h"
 using namespace std;
-enum Color {
-    GREEN=10,
-    RED=4,
-    WHITE=15,
-    BLUE=3,
-    YELLOW=6,
-    PINK=12,
-};
+namespace kadane{
 struct step{
     int index;
     int tempstart;
@@ -22,121 +14,134 @@ struct step{
     string st1;
     string st2;
 };
-void setColor(int color){
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
+void reset(vector<int>& nums){
+    gotoxy(0,0);
+    nums.clear();
+    int n;
+    cout<<"enter your new array size: ";
+    cin>>n;
+    nums.resize(n);
+    cout<<"\nenter the array elements:\n";
+    for(int i=0;i<n;i++){
+        cin>>nums[i];
+    }
 }
 void displayArray(vector<int>& nums,int currindex,int currstart,int currend,int currsum,int maxsum,int maxstart,int maxend,string str1,string str2){
      for(int i=0;i<nums.size();++i){
         if(i==currstart){
-            setColor(RED);
+            cout<<red;
             cout<<"[";
-            setColor(WHITE);
+            cout<<white;
         }
         if(i==maxstart){
-            setColor(GREEN);
+            cout<<green;
             cout<<"[";
-            setColor(WHITE);
+            cout<<white;
         }
         if(i==currindex) {
-            setColor(YELLOW);
+            cout<<yellow;
         }
-        else if(i>=maxstart&&i<=maxend) setColor(GREEN);
-        else if(i>=currstart&&i<=currend) setColor(RED);
-        else setColor(WHITE);
+        else if(i>=maxstart&&i<=maxend) cout<<green;
+        else if(i>=currstart&&i<=currend) cout<<red;
+        else cout<<white;
         cout<<nums[i];
-        setColor(WHITE);
+        cout<<white;
         cout<<" ";
         if(i==maxend){
-            setColor(GREEN);
+            cout<<green;
             cout<<"]";
-            setColor(WHITE);
+            cout<<white;
         }
         if(i==currend){
-            setColor(RED);
+            cout<<red;
             cout<<"]";
-            setColor(WHITE);
+            cout<<white;
         }
     }
    
-    setColor(WHITE);
-        setColor(BLUE);
-        cout<<"\ncurrent sum = ";
-        setColor(RED);
+    cout<<white;
+        cout<<blue;
+        cout<<"\n\ncurrent sum = ";
+        cout<<red;
         cout<<"[ ";
         for(int i=currstart;i<=currend;i++){
             cout<<nums[i]<<" ";
         }
         cout<<"] = "<<currsum<<"  ";
-        setColor(PINK);
+        cout<<purple;
         cout<<str1<<endl;
-        setColor(WHITE);
-        setColor(BLUE);
-        cout<<"maxsum = ";
-        setColor(GREEN);
+        cout<<white;
+        cout<<blue;
+        cout<<"\nmaxsum = ";
+        cout<<green;
         cout<<"[ ";
         for(int i=maxstart;i<=maxend;i++){
             cout<<nums[i]<<" ";
         }
         cout<<"] = "<<maxsum<<"   ";
-        setColor(PINK);
+        cout<<purple;
         cout<<str2<<endl;
-        setColor(WHITE);
+        cout<<white;
     cout<<"\n\n";
 }
 void displayfinal(vector<int> nums,int s,int e,int m){
          for(int i=0;i<nums.size();i++){
             if(i==s){
-                setColor(GREEN);
+                cout<<green;
                 cout<<"[";
-                setColor(WHITE);
+                cout<<white;
             }
             if(i>=s&&i<=e){
-                setColor(GREEN);
+                cout<<green;
                 cout<<nums[i]<<" ";
-                setColor(WHITE);
+                cout<<white;
             }
             else{
                 cout<<nums[i]<<" ";
             }
             if(i==e){
+                cout<<green;
                 cout<<"] ";
+                cout<<white;
             } 
          }
-         setColor(BLUE);
+         cout<<blue;
          cout<<endl<<"max sum subarray = ";
-         setColor(GREEN);
+         cout<<green;
          cout<<"[";
          for(int i=s;i<=e;i++){
             cout<<nums[i]<<" ";
          }
          cout<<"] = ";
-          setColor(BLUE);
+          cout<<blue;
             cout<<m<<endl;
-         setColor(WHITE);  
+        cout<<white; 
          
     }
-    void displayfirst(vector<int> nums){
-       cout<<"step 0: \n\n";
-       cout<<"array: ";
+    void displayfirst(vector<int> nums,int s){
+        cout<<cyan;
+       cout<<"step: 0/"<<s<<"\n\n";
+       cout<<"Array: ";
+       cout<<white;
         for(int i=0;i<nums.size();i++){
             if(i==0){
-                setColor(RED);
+                cout<<red;
                 cout<<"[";
-                setColor(GREEN);
+                cout<<green;
                 cout<<"[";
-                setColor(YELLOW);
+                cout<<yellow;
                 cout<<nums[i];
-                setColor(GREEN);
+                cout<<green;
                 cout<<"]";
-                setColor(RED);
+                cout<<red;
                 cout<<"] ";
-                setColor(WHITE);
+                cout<<white;
             }
             else{
                 cout<<nums[i]<<" ";
             }
         }
-         cout<<"\nstarting with currsum=maxsum="<<nums[0]<<"\n";
+         cout<<yellow<<"\n\nstarting with currsum=maxsum="<<nums[0]<<"\n";
         cout<<endl;
     }
 void kadaneVisualizer(vector<int> &nums){
@@ -149,22 +154,22 @@ void kadaneVisualizer(vector<int> &nums){
     for(int i=1;i<nums.size();i++){
         p=0;
         if(currsum<0){
-            str1="cursum{"+to_string(currsum)+"} was -ve ,so started currsum newly from "+to_string(nums[i]);
+            str1="-> cursum{"+to_string(currsum)+"} is -ve ,so started currsum newly from "+to_string(nums[i]);
           currsum=nums[i];
             tempstart=i;
             }else{
-            str1="currsum{"+to_string(currsum)+"} added "+to_string(nums[i])+" to become "+to_string(currsum+nums[i])+" as currsum{"+to_string(currsum)+"} was not -ve";
+            str1="-> currsum{"+to_string(currsum)+"} added "+to_string(nums[i])+" to become "+to_string(currsum+nums[i])+" as currsum{"+to_string(currsum)+"} was not -ve";
             currsum+=nums[i];
         }
         if(currsum>maxsum){
-            str2="currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} so updated maxsum {maxsum = currsum}";
+            str2="-> currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} so changed maxsum as currsum {maxsum <- currsum}";
              maxsum=currsum;
              start=tempstart;
             end=i;
             p=1;
         }
         if(p==0){
-            str2="maxsum didnt change, as maxsum{"+to_string(maxsum)+"} > currsum{"+to_string(currsum)+"}";
+            str2="-> maxsum didnt change, as maxsum{"+to_string(maxsum)+"} > currsum{"+to_string(currsum)+"}";
         }
         fs=start;
         fe=end;
@@ -173,18 +178,23 @@ void kadaneVisualizer(vector<int> &nums){
     }
     int stepptr=-1;
     while(1){
-        system("cls");
-        cout<<"press 'n' for next step,'p' for previous step and 'q' for final result\n\n";
-        setColor(YELLOW);
-        cout<<"red brackets []= current sum\ngreen brackets []=max sum so far\nyellow color=current index\n\n";
-        setColor(WHITE);
+        gotoxy(0,0);
+        cout<<green<<"\n\n-----> KADANES ALGORITHM VISUALIZATION <-----\n\n";
+        cout<<"Q) Find the maximum subarray sum of a given array where subarray size is not fixed: "<<red<<"LC question - 53\n\n";
+        cout<<cyan;
+        cout<<"press 'n' for next step\n'p' for previous step\n'q' for final result\n'r' to reset the array\n\n";
+       cout<<yellow;
+        cout<<"red brackets [] -> current sum\ngreen brackets [] -> max sum so far\nyellow color -> current index value\n\n";
+        cout<<white;
         if(stepptr==-1){
-            displayfirst(nums);
+            displayfirst(nums,steps.size());
         }
         else{
         step s=steps[stepptr];
-        cout<<"step: "<<stepptr+1<<"/"<<steps.size()<<endl;
+        cout<<cyan;
+        cout<<"step: "<<stepptr+1<<"/"<<steps.size()<<endl<<endl;
         cout<<"Array : ";
+        cout<<white;
            displayArray(nums,s.index,s.tempstart,s.index,s.currsum,s.maxsum,s.start,s.end,s.st1,s.st2);
         }
         char ch=_getch();
@@ -194,16 +204,32 @@ void kadaneVisualizer(vector<int> &nums){
         else if(ch=='p'||ch=='P'){
             if(stepptr>-1) stepptr--;
         }
-        else if(ch=='q'||ch=='Q'){
+         else if(ch=='q'||ch=='Q'){
             cout<<"final result :\n";
-            displayfinal(nums,fs,fe,fm);
-            break;
-        }  
+          displayfinal(nums,fs,fe,fm);
+            cout<<green;
+            cout<<"\n\n---> Kadanes algorithm visualization completed  <----\n\n";
+            cout<<"if you want to use different array ,press 'r' or press again 'q' to exit\n";
+           while(1){
+            cout<<white;
+            char ch=_getch();
+             if(ch=='r'||ch=='R'){
+                reset(nums);
+                kadaneVisualizer(nums);
+             }
+             else if(ch=='q'||ch=='Q'){
+               return;
+             }
+        }
+    
+    }
+        
 }     
   return ;  
 }
-int main(){
+int run(){
     vector<int> nums ={-2, 1, -3, 4, -1, 2, 1, -5, 4};
     kadaneVisualizer(nums);
     return 0;
+}
 }
