@@ -137,7 +137,6 @@ void slidingwindow(vector<int> nums,int k){
                      return;
                   }
             }
-            break;
           }
     }
     return ;
