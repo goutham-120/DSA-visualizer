@@ -15,7 +15,7 @@ int main(){
        cout<<yellow<<"\n\n------> WELCOME TO CODEFLOW DSA VISUALIZER <---------\n\n\n";
        cout<<cyan<<"CHOOSE YOUR VISUALIZER \n\n"<<green;
        cout<<"1. SLIDING WINDOW VISUALIZER\n\n2. KADANES VISUALIZER\n\n3. TWO POINTER METHOD VISUALIZER\n\n4. RECURSION-BACKTRACKING VISUALSIZER\n\n5. MONOTONIC STACK VISUALIZER\n\n6. BINARY SEARCH ON ANSWER VISUALIZER\n\n7. PREFIX SUM VISUALIZER\n\n"<<white;
-       cout<<"8. EXIT\n\n";
+       cout<<red<<"8. EXIT\n\n"<<white;
        cout<<"enter your choice: ";
       cin>>choice;
       switch(choice){
@@ -40,7 +40,7 @@ int main(){
         case 7:
            prefix::run();
          case 8:
-            cout<<red<<"EXITING...\n\n";
+            cout<<red<<"\n\nEXITING...\n\n"<<white;
             exit(0);
          break;
       }
