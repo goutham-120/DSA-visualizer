@@ -75,7 +75,7 @@ I wanted to combine my interest in Data Structures and Algorithms with a hands-o
 This is my first complete **Real-time user-interactive DSA visualizer** project in C++ using terminal UI and ANSI control. It was built entirely without external libraries or frameworks. The project uses ANSI escape sequences to control output, handle animations, clear screens, and simulate DSA step-by-step — all in real time and cross-platform.
 
 The code is modular, with each algorithm in its own folder, making it easy to extend and maintain.
- 
-    
+
+
 ## Demo
-![DSA Visualizer Demo](demo/DEMO.gif)
+![DSA Visualizer Demo](demo/demo.mp4)
