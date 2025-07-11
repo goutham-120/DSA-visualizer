@@ -78,4 +78,4 @@ The code is modular, with each algorithm in its own folder, making it easy to ex
 
 
 ## Demo
-![DSA Visualizer Demo](demo/demo.mp4)
+![DSA Visualizer Demo](demo/Demo.gif)
