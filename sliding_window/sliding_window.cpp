@@ -89,7 +89,7 @@ void slidingwindow(vector<int> nums,int k){
     for(int i=k;i<nums.size();i++){
         currsum=currsum+nums[i]-nums[i-k];
          str1="-> checked window sum starting from "+to_string(nums[i-k+1])+" to "+to_string(nums[i]);
-         str2="-> maxsum didnt change, as still maxsum{"+to_string(maxsum)+"} > currsum{"+to_string(currsum)+"}";
+         str2="-> maxsum didnt change, as still maxsum{"+to_string(maxsum)+"} >= currsum{"+to_string(currsum)+"}";
         if(currsum>maxsum){
             str2="-> as currsum{"+to_string(currsum)+"} > maxsum{"+to_string(maxsum)+"} updating maxsum -> maxsum = "+to_string(currsum);
              maxsum=currsum;
